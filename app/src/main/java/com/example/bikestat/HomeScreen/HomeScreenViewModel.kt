@@ -1,4 +1,4 @@
-package com.example.bikestattest.HomeScreen
+package com.example.bikestat.HomeScreen
 
 import android.util.Log
 import org.mongodb.kbson.ObjectId

@@ -1,4 +1,4 @@
-package com.example.bikestattest.StatisticsScreen
+package com.example.bikestat.StatisticsScreen
 
 import android.util.Log
 

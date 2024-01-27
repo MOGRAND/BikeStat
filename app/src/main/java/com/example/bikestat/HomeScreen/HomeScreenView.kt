@@ -60,7 +60,6 @@ import com.example.bikestat.R
 import com.example.bikestat.ui.theme.MainOrange
 import com.example.bikestat.ui.theme.MainTransparentBlue
 import com.example.bikestat.ui.theme.MainTransparentBlueForCicrlce
-import com.example.bikestattest.HomeScreen.HomeScreenViewModel
 import com.google.android.gms.maps.MapView
 
 import com.google.android.gms.maps.model.CameraPosition
