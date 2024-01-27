@@ -56,6 +56,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
+import com.example.bikestat.Location.getLocation
 import com.example.bikestat.R
 import com.example.bikestat.SideOperations.BitmapDescriptorConv
 import com.example.bikestat.SideOperations.DoubleOperations

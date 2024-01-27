@@ -1,6 +1,7 @@
 package com.example.bikestat.StatisticsScreen
 
 import android.util.Log
+import com.example.bikestat.SideOperations.DifficultyOperations
 
 
 object StatisticsScreenViewModel {
