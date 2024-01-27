@@ -27,6 +27,7 @@ import co.yml.charts.ui.linechart.model.LineType
 import co.yml.charts.ui.linechart.model.SelectionHighlightPoint
 import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.ui.linechart.model.ShadowUnderLine
+import com.example.bikestat.RealmDatabase.RealmOperations
 import com.example.bikestat.SideOperations.DoubleOperations
 import com.example.bikestat.SideOperations.TimeConv
 import com.example.bikestat.ui.theme.MainOrange
