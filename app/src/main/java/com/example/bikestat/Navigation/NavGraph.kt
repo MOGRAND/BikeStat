@@ -7,9 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.bikestattest.HistoryScreen.HistoryScreenView
-import com.example.bikestattest.HomeScreen.HomeScreenView
-import com.example.bikestattest.StatisticsScreen.StatisticsScreenView
 
 
 @Composable
