@@ -57,7 +57,12 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
 import com.example.bikestat.R
+import com.example.bikestat.SideOperations.BitmapDescriptorConv
+import com.example.bikestat.SideOperations.DoubleOperations
+import com.example.bikestat.SideOperations.TimeConv
+import com.example.bikestat.SideOperations.VectorOperations
 import com.example.bikestat.ui.theme.MainOrange
+import com.example.bikestat.ui.theme.MainTransparentBlack
 import com.example.bikestat.ui.theme.MainTransparentBlue
 import com.example.bikestat.ui.theme.MainTransparentBlueForCicrlce
 import com.google.android.gms.maps.MapView

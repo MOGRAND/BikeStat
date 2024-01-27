@@ -27,6 +27,8 @@ import co.yml.charts.ui.linechart.model.LineType
 import co.yml.charts.ui.linechart.model.SelectionHighlightPoint
 import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.ui.linechart.model.ShadowUnderLine
+import com.example.bikestat.SideOperations.DoubleOperations
+import com.example.bikestat.SideOperations.TimeConv
 import com.example.bikestat.ui.theme.MainOrange
 import java.util.Calendar
 
@@ -72,7 +74,7 @@ fun LineChartField() {
         .labelAndAxisLinePadding(25.dp)
         .labelData { i ->
             val yScale = distanceList.max().toDouble() / steps
-            DoubleOperations.roundDoubleToTwoDecimalPlaces(i * yScale)
+            DoubleOperations.roundDoubleToTwoDecimalPlaces(i * yScale.toDouble())
         }
         .axisLineColor(MainOrange)
         .axisLabelColor(Color.Black)

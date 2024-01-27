@@ -1,9 +1,5 @@
 package com.example.bikestat.StatisticScreen
 
-import com.example.bikestattest.StatisticsScreen.StatisticsScreenViewModel
-
-package com.example.bikestattest.StatisticsScreen
-
 import android.app.DatePickerDialog
 import android.util.Log
 import android.widget.DatePicker
@@ -62,7 +58,19 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.bikestat.HistoryScreen.DataViewLine
+import com.example.bikestat.HomeScreen.HomeScreenViewModel
+import com.example.bikestat.Navigation.ScreenRoutes
+import com.example.bikestat.R
+import com.example.bikestat.SideOperations.StringOperations
+import com.example.bikestat.SideOperations.TimeConv
+import com.example.bikestat.StatisticsScreen.LineChartField
+import com.example.bikestat.StatisticsScreen.StatisticsScreenViewModel
 import com.example.bikestat.ui.theme.MainOrange
+import com.example.bikestat.ui.theme.MainTransparentBlack
+import com.example.bikestat.ui.theme.dificultyEazyColor
+import com.example.bikestat.ui.theme.dificultyHardColor
+import com.example.bikestat.ui.theme.dificultyMediumColor
 import java.util.Calendar
 import java.util.Date
 
