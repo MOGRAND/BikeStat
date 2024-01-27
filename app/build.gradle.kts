@@ -11,11 +11,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.bikestattest"
+    namespace = "com.example.bikestat"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.bikestattest"
+        applicationId = "com.example.bikestat"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
