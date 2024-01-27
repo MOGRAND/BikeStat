@@ -239,6 +239,7 @@ fun GoogleMapsView(
                 )
             )
         }
+
         if (cameraPositionState.position.zoom >= 15f) {
             Circle(
                 center = currentLocation.value,
@@ -248,6 +249,7 @@ fun GoogleMapsView(
                 strokeWidth = 10.0f
             )
         }
+
         Polyline(
             points = routeList.value.toList(),
             color = MainTransparentBlue,
@@ -261,7 +263,6 @@ fun StartAndConfirmButton(
     isBuildingRoute: MutableState<Boolean>,
     isSaving: MutableState<Boolean>,
     isCameraLocked: MutableState<Boolean>
-
 ) {
     Row(
         modifier = Modifier
