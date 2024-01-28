@@ -56,8 +56,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavController
+import com.example.bikestat.Location.getLocation
 import com.example.bikestat.R
+import com.example.bikestat.RealmDatabase.RouteModel
+import com.example.bikestat.SideOperations.BitmapDescriptorConv
+import com.example.bikestat.SideOperations.DoubleOperations
+import com.example.bikestat.SideOperations.TimeConv
+import com.example.bikestat.SideOperations.VectorOperations
 import com.example.bikestat.ui.theme.MainOrange
+import com.example.bikestat.ui.theme.MainTransparentBlack
 import com.example.bikestat.ui.theme.MainTransparentBlue
 import com.example.bikestat.ui.theme.MainTransparentBlueForCicrlce
 import com.google.android.gms.maps.MapView
@@ -239,6 +246,7 @@ fun GoogleMapsView(
                 )
             )
         }
+
         if (cameraPositionState.position.zoom >= 15f) {
             Circle(
                 center = currentLocation.value,
@@ -248,6 +256,7 @@ fun GoogleMapsView(
                 strokeWidth = 10.0f
             )
         }
+
         Polyline(
             points = routeList.value.toList(),
             color = MainTransparentBlue,
@@ -261,7 +270,6 @@ fun StartAndConfirmButton(
     isBuildingRoute: MutableState<Boolean>,
     isSaving: MutableState<Boolean>,
     isCameraLocked: MutableState<Boolean>
-
 ) {
     Row(
         modifier = Modifier

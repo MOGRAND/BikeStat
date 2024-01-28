@@ -1,6 +1,9 @@
 package com.example.bikestat.StatisticsScreen
 
 import android.util.Log
+import com.example.bikestat.RealmDatabase.RealmOperations
+import com.example.bikestat.RealmDatabase.RouteModel
+import com.example.bikestat.SideOperations.DifficultyOperations
 
 
 object StatisticsScreenViewModel {

@@ -1,6 +1,6 @@
 package com.example.bikestat.Navigation
 
-sealed class ScreenRoutes(val route : String) {
+sealed class ScreenRoutes(val route: String) {
 
     object HomeScreen : ScreenRoutes(route = "home_screen")
 

@@ -1,12 +1,12 @@
 package com.example.bikestat.HistoryScreen
 
+import com.example.bikestat.SideOperations.DoubleOperations
+import com.example.bikestat.SideOperations.StringOperations
+import com.example.bikestat.SideOperations.TimeConv
 import com.example.bikestat.ui.theme.MainOrange
 import com.example.bikestat.ui.theme.dificultyEazyColor
 import com.example.bikestat.ui.theme.dificultyHardColor
 import com.example.bikestat.ui.theme.dificultyMediumColor
-
-package com.example.bikestattest.HistoryScreen
-
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -40,6 +40,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.bikestat.RealmDatabase.RealmOperations
+import com.example.bikestat.RealmDatabase.RouteModel
 
 
 @Composable
