@@ -19,12 +19,12 @@
 #### - Графическое отображения прогресса тренировок 
 #### - Рекомендация сложности следующей поездки 
 ## Технические средства:
-#### - Карты: *Google Maps SDK*
-#### - База данных: *Realm* от *MongoDB*
-#### - Работа с сетью: *Retrofit2*
-#### - UI-фреймворк: *Jetpack Compose*
-#### - Язык программирования: *Kotlin*
-#### - Работа с графиками: *Ycharts*
+#### - Карты: [*Google Maps SDK*](https://developers.google.com/maps/documentation/android-sdk/overview?hl=ru)
+#### - База данных: [*Realm* от *MongoDB*](https://www.mongodb.com/docs/realm/sdk/java/)
+#### - Работа с сетью: [*Retrofit2*](https://github.com/JakeWharton/retrofit2-kotlinx-serialization-converter)
+#### - UI-фреймворк: [*Jetpack Compose*](https://developer.android.com/jetpack/compose)
+#### - Язык программирования: [*Kotlin*](https://kotlinlang.org/)
+#### - Работа с графиками: [*Ycharts*](https://github.com/codeandtheory/YCharts)
 ## Контактные данные:
 #### - Почта: mograndpmg@gmail.com
 #### - Телеграмм: @miroslav_pug
