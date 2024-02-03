@@ -73,18 +73,22 @@ fun TopBar() {
 @Composable
 fun RouteHistoryColumn() {
     val routeList = RealmOperations.queryListOfRouteHistoryFromRealm().reversed()
-    if (routeList.size >= 1){
+    if (routeList.size >= 1) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            routeList.forEach {routeHistory ->
-                HistoryRouteCard(routeHistory)
+            if (routeList.size >= 1) {
+                routeList.forEach { routeHistory ->
+                    HistoryRouteCard(routeHistory)
+                }
+            } else {
+                Text(text = "Тут ничего нет", modifier = Modifier.padding(top = 20.dp))
             }
         }
-    }else{
-        Text(text = "Тут ничего нет")
     }
 }
 
@@ -128,7 +132,21 @@ fun HistoryRouteCard(routeHistory: RouteModel) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
-                Text(text = StringOperations.cutTheString(routeHistory.title, 12), fontSize = 25.sp, color = Color.Black, fontWeight = FontWeight.Bold)
+                if (isOpened.value){
+                    Text(
+                        text = StringOperations.cutTheString(routeHistory.title, 20),
+                        fontSize = 20.sp,
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold
+                    )
+                }else{
+                    Text(
+                        text = StringOperations.cutTheString(routeHistory.title, 15),
+                        fontSize = 20.sp,
+                        color = Color.Black,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
                 Text(text = routeHistory.date, fontSize = 25.sp, color = Color.Black)
             }
             DataViewLine(
@@ -138,20 +156,35 @@ fun HistoryRouteCard(routeHistory: RouteModel) {
                 secondMirrorData = "Время"
             )
             AnimatedVisibility(
-                visible = isOpened.value,) {
-                Column(modifier = Modifier
-                    .fillMaxWidth()
-                    .height(210.dp)) {
+                visible = isOpened.value,
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(210.dp)
+                ) {
                     DataViewLine(
-                        firstMainData = "${DoubleOperations.roundDoubleToTwoDecimalPlaces(routeHistory.maximumSpeedInKMH)} км/ч",
+                        firstMainData = "${
+                            DoubleOperations.roundDoubleToTwoDecimalPlaces(
+                                routeHistory.maximumSpeedInKMH
+                            )
+                        } км/ч",
                         firstMirrorData = "Макc. скорость",
-                        secondMainData = "${DoubleOperations.roundDoubleToTwoDecimalPlaces(routeHistory.averageSpeedInKMH)} км/ч",
+                        secondMainData = "${
+                            DoubleOperations.roundDoubleToTwoDecimalPlaces(
+                                routeHistory.averageSpeedInKMH
+                            )
+                        } км/ч",
                         secondMirrorData = "Ср. скорость",
                     )
                     DataViewLine(
                         firstMainData = "${routeHistory.minPulse}/${routeHistory.maxPulse}/${routeHistory.avgPulse}",
                         firstMirrorData = "Пульс мин/макс/ср",
-                        secondMainData = "${DoubleOperations.roundDoubleToTwoDecimalPlaces(routeHistory.spentCalories)} ккал",
+                        secondMainData = "${
+                            DoubleOperations.roundDoubleToTwoDecimalPlaces(
+                                routeHistory.spentCalories
+                            )
+                        } ккал",
                         secondMirrorData = "Калории",
                     )
                     DataViewLine(
@@ -167,7 +200,12 @@ fun HistoryRouteCard(routeHistory: RouteModel) {
 }
 
 @Composable
-fun DataViewLine(firstMainData: String, firstMirrorData: String,secondMainData: String, secondMirrorData: String){
+fun DataViewLine(
+    firstMainData: String,
+    firstMirrorData: String,
+    secondMainData: String,
+    secondMirrorData: String
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()

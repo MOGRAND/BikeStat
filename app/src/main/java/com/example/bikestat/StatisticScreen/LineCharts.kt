@@ -47,7 +47,7 @@ fun LineChartField() {
     }/$year"
     val dateList = TimeConv.getFiveDaysDateList(currentDate = currentDate)
     val distanceList = RealmOperations.getAListOfFiveDaysDistance(dateList)
-    Log.d("MyLog", distanceList[0].toFloat().toString())
+    Log.d("MyLog", distanceList.toString())
     val pointData = listOf(
         Point(0f, (distanceList[4]).toFloat()),
         Point(1f, (distanceList[3]).toFloat()),
@@ -63,7 +63,7 @@ fun LineChartField() {
         .steps(pointData.size - 1)
         .labelData {
             val ind = 4 - it
-            dateList[ind].substringBefore("/")
+            TimeConv.formatToTwoCharacters(dateList[ind].substringBefore("/").toInt())
         }
         .labelAndAxisLinePadding(20.dp)
         .axisLineColor(MainOrange)
