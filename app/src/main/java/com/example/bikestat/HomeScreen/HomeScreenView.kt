@@ -191,7 +191,8 @@ fun HomeScreenView(navController: NavController) {
             StartAndConfirmButton(
                 isBuildingRoute = isBuildingRoute,
                 isSaving = isSaving,
-                isCameraLocked = isCameraLocked
+                isCameraLocked = isCameraLocked,
+                timeInSec = timeInSec
             )
         }
     }
@@ -206,7 +207,8 @@ fun HomeScreenView(navController: NavController) {
             routeMaximumSpeed = speedMutableList.value.max(),
             speedMutableList = speedMutableList,
             routeMutableList = routeMutableList,
-            route = mainedRoute
+            route = mainedRoute,
+            isBuildingRoute = isBuildingRoute
         )
     }
     if (isConfirmed.value) {
@@ -276,7 +278,8 @@ fun GoogleMapsView(
 fun StartAndConfirmButton(
     isBuildingRoute: MutableState<Boolean>,
     isSaving: MutableState<Boolean>,
-    isCameraLocked: MutableState<Boolean>
+    isCameraLocked: MutableState<Boolean>,
+    timeInSec: MutableState<Int>,
 ) {
     Row(
         modifier = Modifier
@@ -334,7 +337,9 @@ fun StartAndConfirmButton(
             IconButton(
                 modifier = Modifier.fillMaxSize(),
                 onClick = {
-                    isSaving.value = true
+                    if (isBuildingRoute.value || timeInSec.value > 0){
+                        isSaving.value = true
+                    }
 
                 }
             ) {
@@ -351,7 +356,7 @@ fun StartAndConfirmButton(
 fun TripDataField(
     averageSpeedInKMH: MutableState<Double>,
     timeInSec: MutableState<Int>,
-    distanceInKM: MutableState<Double>
+    distanceInKM: MutableState<Double>,
 ) {
     Row(
         modifier = Modifier
@@ -402,7 +407,8 @@ fun ConfirmSaveField(
     routeMaximumSpeed: Double,
     speedMutableList: MutableState<MutableList<Double>>,
     routeMutableList: MutableState<MutableList<LatLng>>,
-    route: RouteModel
+    route: RouteModel,
+    isBuildingRoute: MutableState<Boolean>,
 
 ) {
     Row(
@@ -461,9 +467,8 @@ fun ConfirmSaveField(
                                 timeInSec = routeMutableTimeInSec.value,
                                 averageSpeedInKMH = routeMutableAverageSpeed.value,
                                 maximumSpeedInKMH = routeMaximumSpeed,
-                                id = route.id
-                            )
-
+                                id = route.id                            )
+                            isBuildingRoute.value = false
                             isSaving.value = false
                             routeMutableTitle.value = ""
                             routeMutableDistanceInKM.value = 0.0
