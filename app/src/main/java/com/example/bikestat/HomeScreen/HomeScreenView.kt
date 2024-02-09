@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsTopHeight
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -46,6 +48,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.vectorResource
@@ -171,7 +174,8 @@ fun HomeScreenView(navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.White)
+                .background(Color.White),
+            verticalArrangement = Arrangement.Bottom,
         ) {
             GoogleMapsView(
                 currentLocation = currentLocation,
@@ -187,7 +191,8 @@ fun HomeScreenView(navController: NavController) {
             StartAndConfirmButton(
                 isBuildingRoute = isBuildingRoute,
                 isSaving = isSaving,
-                isCameraLocked = isCameraLocked
+                isCameraLocked = isCameraLocked,
+                timeInSec = timeInSec
             )
         }
     }
@@ -202,7 +207,8 @@ fun HomeScreenView(navController: NavController) {
             routeMaximumSpeed = speedMutableList.value.max(),
             speedMutableList = speedMutableList,
             routeMutableList = routeMutableList,
-            route = mainedRoute
+            route = mainedRoute,
+            isBuildingRoute = isBuildingRoute
         )
     }
     if (isConfirmed.value) {
@@ -229,17 +235,20 @@ fun GoogleMapsView(
         }
     }
 
+
+
+
     GoogleMap(
         modifier = Modifier
             .fillMaxWidth()
-            .height(560.dp),
+            .height(570.dp), // 400
         cameraPositionState = cameraPositionState
     ) {
         if (cameraPositionState.position.zoom < 15f) {
             Marker(
                 state = MarkerState(currentLocation.value),
-                title = "Dasa",
-                snippet = "Marker in Singapore",
+                title = "Ваши координаты",
+                snippet = "${DoubleOperations.roundDoubleToTwoDecimalPlaces(currentLocation.value.latitude)} / ${DoubleOperations.roundDoubleToTwoDecimalPlaces(currentLocation.value.longitude)}",
                 icon = BitmapDescriptorConv.bitmapDescriptorFromVector(
                     context,
                     R.drawable.user_icon
@@ -269,7 +278,8 @@ fun GoogleMapsView(
 fun StartAndConfirmButton(
     isBuildingRoute: MutableState<Boolean>,
     isSaving: MutableState<Boolean>,
-    isCameraLocked: MutableState<Boolean>
+    isCameraLocked: MutableState<Boolean>,
+    timeInSec: MutableState<Int>,
 ) {
     Row(
         modifier = Modifier
@@ -327,7 +337,9 @@ fun StartAndConfirmButton(
             IconButton(
                 modifier = Modifier.fillMaxSize(),
                 onClick = {
-                    isSaving.value = true
+                    if (isBuildingRoute.value || timeInSec.value > 0){
+                        isSaving.value = true
+                    }
 
                 }
             ) {
@@ -344,7 +356,7 @@ fun StartAndConfirmButton(
 fun TripDataField(
     averageSpeedInKMH: MutableState<Double>,
     timeInSec: MutableState<Int>,
-    distanceInKM: MutableState<Double>
+    distanceInKM: MutableState<Double>,
 ) {
     Row(
         modifier = Modifier
@@ -395,7 +407,8 @@ fun ConfirmSaveField(
     routeMaximumSpeed: Double,
     speedMutableList: MutableState<MutableList<Double>>,
     routeMutableList: MutableState<MutableList<LatLng>>,
-    route: RouteModel
+    route: RouteModel,
+    isBuildingRoute: MutableState<Boolean>,
 
 ) {
     Row(
@@ -454,9 +467,8 @@ fun ConfirmSaveField(
                                 timeInSec = routeMutableTimeInSec.value,
                                 averageSpeedInKMH = routeMutableAverageSpeed.value,
                                 maximumSpeedInKMH = routeMaximumSpeed,
-                                id = route.id
-                            )
-
+                                id = route.id                            )
+                            isBuildingRoute.value = false
                             isSaving.value = false
                             routeMutableTitle.value = ""
                             routeMutableDistanceInKM.value = 0.0
@@ -590,7 +602,9 @@ fun ConfirmField(
                     modifier = Modifier.padding(10.dp)
                 )
                 Row(
-                    modifier = Modifier.fillMaxWidth().padding(10.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(10.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Button(

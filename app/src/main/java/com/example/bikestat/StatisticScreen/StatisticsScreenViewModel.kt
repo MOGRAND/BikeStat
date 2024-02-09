@@ -35,6 +35,9 @@ object StatisticsScreenViewModel {
 
     fun getARecommendedDifficulty(): String {
         val routeHistoryList = RealmOperations.queryListOfRouteHistoryFromRealm()
+        if (routeHistoryList.size == 0){
+            return "Легко"
+        }
         val listOfDifficultyFactor = mutableListOf<Double>()
         routeHistoryList.forEach { routeHistory ->
             val difficultyFactor = DifficultyOperations.getDifficultyFactorByAvgSpeedAndAvgPulse(

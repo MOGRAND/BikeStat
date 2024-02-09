@@ -64,6 +64,7 @@ import com.example.bikestat.Navigation.ScreenRoutes
 import com.example.bikestat.R
 import com.example.bikestat.RealmDatabase.RealmOperations
 import com.example.bikestat.RealmDatabase.RouteModel
+import com.example.bikestat.SideOperations.DoubleOperations
 import com.example.bikestat.SideOperations.StringOperations
 import com.example.bikestat.SideOperations.TimeConv
 import com.example.bikestat.StatisticsScreen.LineChartField
@@ -141,7 +142,7 @@ fun StatisticColumn(
                 PlanRouteCard(planRoute = it, navController = navController)
             }
         } else {
-            Text(text = "Тут ничего нет")
+            Text(text = "Тут ничего нет", modifier = Modifier.padding(top = 20.dp))
         }
     }
 }
@@ -509,12 +510,21 @@ fun PlanRouteCard(planRoute: RouteModel, navController: NavController) {
                 horizontalArrangement = Arrangement.SpaceAround
             ) {
                 Row(modifier = Modifier.width(170.dp), horizontalArrangement = Arrangement.Center) {
-                    Text(
-                        text = StringOperations.cutTheString(planRoute.title, 11),
-                        fontSize = 25.sp,
-                        color = Color.Black,
-                        fontWeight = FontWeight.Bold,
-                    )
+                    if (isOpened.value){
+                        Text(
+                            text = StringOperations.cutTheString(planRoute.title, 20),
+                            fontSize = 20.sp,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }else{
+                        Text(
+                            text = StringOperations.cutTheString(planRoute.title, 15),
+                            fontSize = 20.sp,
+                            color = Color.Black,
+                            fontWeight = FontWeight.Bold,
+                        )
+                    }
                 }
                 Row(modifier = Modifier.width(170.dp), horizontalArrangement = Arrangement.Center) {
                     Text(
@@ -537,7 +547,7 @@ fun PlanRouteCard(planRoute: RouteModel, navController: NavController) {
                 DataViewLine(
                     firstMainData = planRoute.estimatedDifficulty,
                     firstMirrorData = "Расчетная сложность",
-                    secondMainData = "${planRoute.planingAverageSpeedInKMH} км/ч",
+                    secondMainData = "${DoubleOperations.roundDoubleToTwoDecimalPlaces(planRoute.planingAverageSpeedInKMH)} км/ч",
                     secondMirrorData = "Средняя скорость"
                 )
             }

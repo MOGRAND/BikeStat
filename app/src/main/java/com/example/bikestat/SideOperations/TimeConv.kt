@@ -44,24 +44,29 @@ object TimeConv {
 
         val dayMinus = (day.toInt() - index)
 
+
         if (dayMinus <= 0) {
-            if (month == "01") {
+            if (month.toInt()-1 == 0) {
                 currentDay = (31 - abs(dayMinus)).toString()
                 currentMonth = "12"
                 currentYear = (year.toInt()-1).toString()
-            } else if (month == "03" || month == "05" || month == "07" || month == "08" || month == "10" || month == "12") {
-                currentDay = (31 - dayMinus).toString()
+            } else if (month.toInt()-1 == 1 || month.toInt()-1 == 4 || month.toInt()-1 == 6 || month.toInt()-1 == 7 || month.toInt()-1 == 9 || month.toInt()-1 == 11) {
+                currentDay = (31 - abs(dayMinus)).toString()
                 currentMonth = (month.toInt()-1).toString()
-            } else if (month == "04" || month == "06" || month == "09" || month == "11") {
-                currentDay = (30 - dayMinus).toString()
+                currentYear = year
+            } else if (month.toInt()-1 == 3 || month.toInt()-1 == 5 || month.toInt()-1 == 8 || month.toInt()-1 == 10) {
+                currentDay = (30 - abs(dayMinus)).toString()
                 currentMonth = (month.toInt()-1).toString()
+                currentYear = year
             } else {
                 if (year.toInt() % 4 == 0 && year.toInt() % 100 != 0) {
-                    currentDay = (29 - dayMinus).toString()
+                    currentDay = (29 - abs(dayMinus)).toString()
                     currentMonth = (month.toInt()-1).toString()
+                    currentYear = year
                 } else {
-                    currentDay = (28 - dayMinus).toString()
+                    currentDay = (28 - abs(dayMinus)).toString()
                     currentMonth = (month.toInt()-1).toString()
+                    currentYear = year
                 }
             }
         }else{
@@ -69,6 +74,6 @@ object TimeConv {
             currentMonth = month
             currentYear = year
         }
-        return "$currentDay/$currentMonth/$currentYear"
+        return "${formatToTwoCharacters(currentDay.toInt())}/${formatToTwoCharacters(currentMonth.toInt())}/$currentYear"
     }
 }
